@@ -16,9 +16,6 @@ const DEFAULT_SETTINGS: RestaurantSettings = {
   heroImageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&auto=format&fit=crop",
   heroHeadline: "",
   showHeroCta: true,
-  showRewardsBanner: true,
-  rewardsHeadline: "Join Panda Rewards",
-  rewardsSubtext: "Earn points on every visit. Redeem for exclusive dishes and privileges.",
   hours: {
     Monday: { open: true, openTime: "11:00", closeTime: "22:00" },
     Tuesday: { open: true, openTime: "11:00", closeTime: "22:00" },

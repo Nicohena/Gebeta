@@ -17,7 +17,7 @@ export default function FeaturedSection() {
   return (
     <section id="featured" className="py-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="font-bold text-2xl text-[#1A1A1A]">{t.featured.title}</h2>
+        <h2 className="font-bold text-2xl text-[#1A1A1A] dark:text-white">{t.featured.title}</h2>
         <button className="text-sm font-semibold text-[#3B82F6] hover:text-[#F97316] transition-colors">
           View all
         </button>

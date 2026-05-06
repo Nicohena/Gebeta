@@ -1,7 +1,7 @@
 import type { Translation } from "@/types/i18n";
 
 const en: Translation = {
-  nav: { menu: "Menu", drinks: "Drinks", featured: "Featured", rewards: "Rewards" },
+  nav: { menu: "Menu", drinks: "Drinks", featured: "Featured" },
   hero: {
     tagline: "Bold flavors. No boundaries.",
     cta: "Explore the Menu",
@@ -18,11 +18,6 @@ const en: Translation = {
     beer: "Beer",
   },
   featured: { title: "Chef's Selections", subtitle: "Handpicked by our culinary team" },
-  rewards: {
-    title: "Join Panda Rewards",
-    subtitle: "Earn points on every visit. Redeem for exclusive dishes and privileges.",
-    cta: "Sign Up Free",
-  },
   footer: {
     tagline: "Bold flavors. No boundaries.",
     hours: "Hours",

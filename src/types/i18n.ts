@@ -21,7 +21,6 @@ export interface Translation {
     menu: string;
     drinks: string;
     featured: string;
-    rewards: string;
   };
   hero: {
     tagline: string;
@@ -49,11 +48,7 @@ export interface Translation {
     title: string;
     subtitle: string;
   };
-  rewards: {
-    title: string;
-    subtitle: string;
-    cta: string;
-  };
+
   footer: {
     tagline: string;
     hours: string;

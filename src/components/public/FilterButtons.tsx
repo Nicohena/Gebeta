@@ -32,7 +32,7 @@ export default function FilterButtons({ active, onChange }: FilterButtonsProps) 
           className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border ${
             active === cat
               ? "bg-[#F97316] text-white border-[#F97316] shadow-lg shadow-orange-400/30 scale-105"
-              : "bg-white text-[#1A1A1A] border-[#E5E7EB] hover:border-[#F97316] hover:text-[#F97316]"
+              : "bg-white text-[#1A1A1A] border-[#E5E7EB] dark:bg-neutral-900 dark:text-gray-300 dark:border-neutral-800 lg:hover:border-[#F97316] lg:hover:text-[#F97316]"
           }`}
         >
           {labels[cat]}
