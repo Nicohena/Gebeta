@@ -14,9 +14,9 @@ export default function FoodSection() {
   const filtered = active === "All" ? visible : visible.filter((m) => m.category === active);
 
   return (
-    <section id="menu" className="py-8 border-t border-gray-100 mt-8">
+    <section id="menu" className="py-8 border-t border-gray-100 dark:border-neutral-800 mt-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="font-bold text-2xl text-[#1A1A1A]">Food</h2>
+        <h2 className="font-bold text-2xl text-[#1A1A1A] dark:text-white">Food</h2>
         <button className="text-sm font-semibold text-[#3B82F6] hover:text-[#F97316] transition-colors">
           View all
         </button>
@@ -34,7 +34,7 @@ export default function FoodSection() {
           <p className="text-sm">No items in this category yet.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
           {filtered.map((item, i) => (
             <MenuCard key={item.id} item={item} index={i} />
           ))}

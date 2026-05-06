@@ -23,9 +23,6 @@ export interface RestaurantSettings {
   heroImageUrl: string;
   heroHeadline: string;
   showHeroCta: boolean;
-  showRewardsBanner: boolean;
-  rewardsHeadline: string;
-  rewardsSubtext: string;
   hours: {
     [day: string]: {
       open: boolean;

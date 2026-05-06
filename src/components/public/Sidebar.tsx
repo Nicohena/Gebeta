@@ -6,9 +6,9 @@ import { useLocale } from "@/context/LocaleContext";
 import { useMenu } from "@/context/MenuContext";
 
 // Simple SVG Icons
-const HomeIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>;
-const DrinksIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>; // Substitute icon
-const FoodIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>;
+const MenuIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>;
+const DrinksIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4ZM6 2v2M10 2v2M14 2v2" /></svg>;
+const FeaturedIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657zM9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" /></svg>;
 
 export default function Sidebar() {
   const { t } = useLocale();
@@ -17,10 +17,9 @@ export default function Sidebar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "#menu", label: t.nav.menu, icon: <HomeIcon /> },
+    { href: "#menu", label: t.nav.menu, icon: <MenuIcon /> },
     { href: "#drinks", label: t.nav.drinks, icon: <DrinksIcon /> },
-    { href: "#featured", label: t.nav.featured, icon: <FoodIcon /> },
-    { href: "#rewards", label: t.nav.rewards, icon: <HomeIcon /> },
+    { href: "#featured", label: t.nav.featured, icon: <FeaturedIcon /> },
   ];
 
   const handleNavClick = (href: string) => {
@@ -30,35 +29,13 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile Header (visible only on small screens) */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white z-50 px-4 flex items-center justify-between border-b border-gray-100">
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-2xl">🐼</span>
-          <span className="text-[#1A1A1A] font-bold text-xl tracking-wide" style={{ fontFamily: "var(--font-playfair)" }}>
-            Panda
-          </span>
-        </Link>
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 text-gray-600 focus:outline-none"
-        >
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-             {mobileMenuOpen ? (
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-             ) : (
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-             )}
-          </svg>
-        </button>
-      </div>
-
-      {/* Sidebar (fixed on desktop, toggleable on mobile) */}
-      <aside className={`fixed inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-100 flex flex-col transition-transform duration-300 ease-in-out md:translate-x-0 ${mobileMenuOpen ? "translate-x-0 pt-16 md:pt-0" : "-translate-x-full pt-16 md:pt-0"}`}>
+      {/* Sidebar (fixed on desktop) */}
+      <aside className="hidden md:flex fixed inset-y-0 left-0 z-40 w-64 bg-white dark:bg-[#1A1A1A] border-r border-gray-100 dark:border-neutral-800 flex-col transition-colors duration-300">
         
         {/* Logo (hidden on mobile header) */}
         <div className="hidden md:flex items-center gap-2 px-8 py-8">
           <span className="text-3xl">🐼</span>
-          <span className="text-[#1A1A1A] font-bold text-2xl tracking-wide" style={{ fontFamily: "var(--font-playfair)" }}>
+          <span className="text-[#1A1A1A] dark:text-white font-bold text-2xl tracking-wide" style={{ fontFamily: "var(--font-playfair)" }}>
             Panda
           </span>
         </div>
@@ -74,11 +51,11 @@ export default function Sidebar() {
                 onClick={() => handleNavClick(link.href)}
                 className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-sm font-semibold ${
                   isActive 
-                    ? "bg-[#FAFAFA] text-[#1A1A1A]" 
-                    : "text-gray-500 hover:bg-gray-50 hover:text-[#1A1A1A]"
+                    ? "bg-[#FAFAFA] text-[#1A1A1A] dark:bg-neutral-800 dark:text-white" 
+                    : "text-gray-500 hover:bg-gray-50 hover:text-[#1A1A1A] dark:text-gray-400 dark:hover:bg-neutral-800/50 dark:hover:text-white"
                 }`}
               >
-                <div className={`${isActive ? "text-[#F97316]" : "text-gray-400"}`}>
+                <div className={`${isActive ? "text-[#F97316]" : "text-gray-400 dark:text-gray-500"}`}>
                   {link.icon}
                 </div>
                 {link.label}
@@ -87,38 +64,8 @@ export default function Sidebar() {
           })}
         </nav>
 
-        {/* Rewards Banner (Vertical Sidebar Version) */}
-        {restaurantSettings.showRewardsBanner && (
-          <div className="p-4 mt-auto mb-6">
-            <div className="bg-[#0A0A0A] rounded-2xl p-5 text-center relative overflow-hidden shadow-xl shadow-black/10">
-              {/* Decorative elements */}
-              <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-[#1A1A1A]" />
-              <div className="absolute top-4 left-4 text-white/10 text-4xl">★</div>
-              
-              <div className="relative z-10 text-white">
-                <div className="text-3xl mb-2">🐼</div>
-                <h3 className="font-bold text-lg mb-1 leading-tight tracking-wide" style={{ fontFamily: "var(--font-playfair)" }}>
-                  PANDA REWARDS
-                </h3>
-                <p className="text-xs text-gray-400 mb-4 px-2">
-                  Every bite makes a reward.
-                </p>
-                <button className="w-full bg-white text-[#1A1A1A] font-bold py-2 rounded-full text-xs hover:bg-gray-100 transition-colors">
-                  Join now
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </aside>
 
-      {/* Overlay for mobile */}
-      {mobileMenuOpen && (
-        <div 
-          className="fixed inset-0 bg-black/20 z-30 md:hidden" 
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
+      </aside>
     </>
   );
 }

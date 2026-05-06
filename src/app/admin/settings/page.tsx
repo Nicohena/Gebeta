@@ -93,16 +93,7 @@ export default function AdminSettingsPage() {
         <AdminToggle id="toggle-hero-cta" checked={form.showHeroCta} onChange={(v) => set("showHeroCta", v)} label="Show Hero CTA Button" />
       </Section>
 
-      {/* Rewards */}
-      <Section title="Rewards Banner">
-        <AdminToggle id="toggle-rewards" checked={form.showRewardsBanner} onChange={(v) => set("showRewardsBanner", v)} label="Show Rewards Banner" />
-        <Field label="Rewards Headline" id="setting-rewards-headline">
-          <input id="setting-rewards-headline" value={form.rewardsHeadline} onChange={(e) => set("rewardsHeadline", e.target.value)} className={inputCls} />
-        </Field>
-        <Field label="Rewards Subtext" id="setting-rewards-subtext">
-          <textarea id="setting-rewards-subtext" rows={2} value={form.rewardsSubtext} onChange={(e) => set("rewardsSubtext", e.target.value)} className={`${inputCls} resize-none`} />
-        </Field>
-      </Section>
+
 
       {/* Hours */}
       <Section title="Operating Hours">

@@ -1,7 +1,7 @@
 import type { Translation } from "@/types/i18n";
 
 const zh: Translation = {
-  nav: { menu: "菜单", drinks: "饮品", featured: "精选", rewards: "积分" },
+  nav: { menu: "菜单", drinks: "饮品", featured: "精选" },
   hero: {
     tagline: "大胆风味，无界探索。",
     cta: "探索菜单",
@@ -18,11 +18,6 @@ const zh: Translation = {
     beer: "啤酒",
   },
   featured: { title: "主厨精选", subtitle: "由我们的烹饪团队精心挑选" },
-  rewards: {
-    title: "加入熊猫积分计划",
-    subtitle: "每次到店赚取积分，兑换独家菜品和特权。",
-    cta: "免费注册",
-  },
   footer: {
     tagline: "大胆风味，无界探索。",
     hours: "营业时间",

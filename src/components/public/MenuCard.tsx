@@ -25,17 +25,17 @@ export default function MenuCard({ item, index = 0 }: MenuCardProps) {
 
   return (
     <article
-      className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden group hover:shadow-xl hover:shadow-black/10 hover:-translate-y-1 transition-all duration-300"
+      className="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#E5E7EB] dark:border-neutral-800 overflow-hidden group lg:hover:shadow-xl lg:hover:shadow-black/10 dark:lg:hover:shadow-black/40 lg:hover:-translate-y-1 transition-all duration-300"
       style={{ animationDelay: `${index * 60}ms` }}
     >
       {/* Image */}
-      <div className="relative h-52 overflow-hidden bg-gray-100">
+      <div className="relative h-36 sm:h-52 overflow-hidden bg-gray-100 dark:bg-neutral-800">
         <Image
           src={item.image}
           alt={name}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover lg:group-hover:scale-105 transition-transform duration-500"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         />
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
@@ -55,22 +55,22 @@ export default function MenuCard({ item, index = 0 }: MenuCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-3 mb-2">
+      <div className="p-3 sm:p-5">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-3 mb-1 sm:mb-2">
           <h3
-            className="font-bold text-[#1A1A1A] text-base leading-snug flex-1"
+            className="font-bold text-[#1A1A1A] dark:text-white text-sm sm:text-base leading-snug flex-1 line-clamp-1 sm:line-clamp-none"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             {name}
           </h3>
-          <span className="text-[#F97316] font-bold text-base whitespace-nowrap shrink-0">
+          <span className="text-gray-500 sm:text-[#F97316] font-medium sm:font-bold text-xs sm:text-base whitespace-nowrap shrink-0">
             {format(item.priceUSD)}
           </span>
         </div>
-        <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
+        <p className="hidden sm:-webkit-box text-gray-500 dark:text-gray-400 text-sm leading-relaxed line-clamp-2">
           {description}
         </p>
-        <div className="mt-4 flex items-center justify-between">
+        <div className="hidden sm:flex mt-4 items-center justify-between">
           <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">
             {item.category}
           </span>

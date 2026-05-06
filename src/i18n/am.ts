@@ -1,7 +1,7 @@
 import type { Translation } from "@/types/i18n";
 
 const am: Translation = {
-  nav: { menu: "ምናሌ", drinks: "መጠጦች", featured: "ተለይቶ የቀረበ", rewards: "ሽልማቶች" },
+  nav: { menu: "ምናሌ", drinks: "መጠጦች", featured: "ተለይቶ የቀረበ" },
   hero: {
     tagline: "ደፋር ጣዕሞች። ምንም ወሰን የለም።",
     cta: "ምናሌውን ያስሱ",
@@ -18,11 +18,6 @@ const am: Translation = {
     beer: "ቢራ",
   },
   featured: { title: "የሼፍ ምርጫዎች", subtitle: "በምግብ ቤቱ ቡድናችን የተመረጡ" },
-  rewards: {
-    title: "የፓንዳ ሽልማት ይቀላቀሉ",
-    subtitle: "በእያንዳንዱ ጉብኝት ነጥቦች ያግኙ። ለልዩ ምግቦች ያዋጡ።",
-    cta: "ነጻ ይቀላቀሉ",
-  },
   footer: {
     tagline: "ደፋር ጣዕሞች። ምንም ወሰን የለም።",
     hours: "ሰዓቶች",
