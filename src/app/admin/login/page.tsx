@@ -105,8 +105,7 @@ export default function AdminLoginPage() {
           {/* Demo credentials hint */}
           <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Demo Credentials</p>
-            <p className="text-xs text-gray-400">Super Admin: <span className="text-gray-300">admin@panda.com / panda2024</span></p>
-            <p className="text-xs text-gray-400 mt-1">Manager: <span className="text-gray-300">manager@panda.com / manager123</span></p>
+            <p className="text-xs text-gray-400">Admin: <span className="text-gray-300">admin@panda.com / panda2024</span></p>
           </div>
         </div>
       </div>

@@ -7,10 +7,4 @@ export const ADMIN_USERS: StoredAdminUser[] = [
     role: "superadmin",
     name: "Head Admin",
   },
-  {
-    email: "manager@panda.com",
-    password: "manager123",
-    role: "manager",
-    name: "Floor Manager",
-  },
 ];
