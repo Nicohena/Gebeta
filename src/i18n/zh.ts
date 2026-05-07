@@ -27,7 +27,7 @@ const zh: Translation = {
     rights: "© 2024 熊猫餐厅。版权所有。",
   },
   badges: { chefsPick: "主厨推荐", new: "新品", fanFavorite: "人气之选", signature: "招牌" },
-  common: { addToOrder: "加入订单", viewDetails: "查看详情", currency: "货币", language: "语言", loading: "加载中..." },
+  common: { from: "从", addToOrder: "加入订单", viewDetails: "查看详情", currency: "货币", language: "语言", loading: "加载中..." },
 };
 
 export default zh;

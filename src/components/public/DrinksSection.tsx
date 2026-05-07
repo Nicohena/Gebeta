@@ -1,9 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import { useLocale } from "@/context/LocaleContext";
 import { useMenu } from "@/context/MenuContext";
+import { usePriceFormatter } from "@/hooks/usePriceFormatter";
 import type { DrinkCategory } from "@/types/menu";
 
 const DRINK_CATEGORIES: (DrinkCategory | "All")[] = ["All", "Craft Cocktails", "Coffee", "Non-Alcoholic", "Wine", "Beer"];
@@ -11,6 +11,7 @@ const DRINK_CATEGORIES: (DrinkCategory | "All")[] = ["All", "Craft Cocktails", "
 export default function DrinksSection() {
   const { t, locale } = useLocale();
   const { drinkItems } = useMenu();
+  const { format } = usePriceFormatter();
   const [active, setActive] = useState<DrinkCategory | "All">("All");
 
   const visible = drinkItems.filter((d) => d.visible);
@@ -59,6 +60,7 @@ export default function DrinksSection() {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
         {filtered.map((drink, i) => {
           const name = drink.name[locale] || drink.name.en;
+          const hasSizes = drink.sizes && drink.sizes.length > 0;
           return (
             <article
               key={drink.id}
@@ -77,6 +79,10 @@ export default function DrinksSection() {
               <h3 className="font-semibold text-center text-[#1A1A1A] dark:text-gray-100 text-sm md:text-base leading-snug group-hover:text-[#F97316] transition-colors">
                 {name}
               </h3>
+              <p className="text-[#F97316] font-bold text-sm mt-1">
+                {hasSizes && <span className="text-[10px] uppercase mr-1 text-gray-500 dark:text-gray-400 font-medium">{t.common.from}</span>}
+                {format(drink.priceUSD)}
+              </p>
             </article>
           );
         })}

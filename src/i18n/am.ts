@@ -27,7 +27,7 @@ const am: Translation = {
     rights: "© 2024 ፓንዳ ምግብ ቤት። መብቱ በሕግ የተጠበቀ ነው።",
   },
   badges: { chefsPick: "የሼፍ ምርጫ", new: "አዲስ", fanFavorite: "የደጋፊ ተወዳጅ", signature: "ምልክት" },
-  common: { addToOrder: "ወደ ትዕዛዝ ጨምር", viewDetails: "ዝርዝሮችን ይመልከቱ", currency: "ምንዛሬ", language: "ቋንቋ", loading: "እየጫነ..." },
+  common: { from: "ከ", addToOrder: "ወደ ትዕዛዝ አክል", viewDetails: "ዝርዝሮችን ይመልከቱ", currency: "ምንዛሬ", language: "ቋንቋ", loading: "በመጫን ላይ..." },
 };
 
 export default am;
