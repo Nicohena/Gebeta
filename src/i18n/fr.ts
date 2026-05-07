@@ -27,7 +27,7 @@ const fr: Translation = {
     rights: "© 2024 Restaurant Panda. Tous droits réservés.",
   },
   badges: { chefsPick: "Choix du chef", new: "Nouveau", fanFavorite: "Favori des fans", signature: "Signature" },
-  common: { addToOrder: "Ajouter à la commande", viewDetails: "Voir les détails", currency: "Devise", language: "Langue", loading: "Chargement..." },
+  common: { from: "À partir de", addToOrder: "Ajouter à la commande", viewDetails: "Voir les détails", currency: "Devise", language: "Langue", loading: "Chargement..." },
 };
 
 export default fr;

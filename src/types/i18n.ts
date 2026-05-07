@@ -64,6 +64,7 @@ export interface Translation {
     signature: string;
   };
   common: {
+    from: string;
     addToOrder: string;
     viewDetails: string;
     currency: string;
