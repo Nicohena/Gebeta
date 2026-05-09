@@ -118,3 +118,24 @@ alter publication supabase_realtime add table public.drink_items;
 alter publication supabase_realtime add table public.restaurant_settings;
 alter publication supabase_realtime add table public.exchange_rates;
 alter publication supabase_realtime add table public.rate_history;
+
+-- 6. feedback table
+create table public.feedback (
+  id uuid primary key default uuid_generate_v4(),
+  item_id text not null,
+  rating integer not null check (rating >= 1 and rating <= 5),
+  comment text,
+  customer_name text,
+  is_read boolean not null default false,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.feedback enable row level security;
+
+-- Policies for feedback
+-- Anyone can insert feedback
+create policy "Allow public insert access to feedback" on public.feedback for insert with check (true);
+-- Only authenticated users (admins) can read or modify feedback
+create policy "Allow authenticated users full access to feedback" on public.feedback for all to authenticated using (true) with check (true);
+
+alter publication supabase_realtime add table public.feedback;
