@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useLocale } from "@/context/LocaleContext";
 import { useMenu } from "@/context/MenuContext";
 import { usePriceFormatter } from "@/hooks/usePriceFormatter";
-import type { DrinkCategory } from "@/types/menu";
+import ItemDetailModal from "./ItemDetailModal";
+import type { DrinkCategory, DrinkItem } from "@/types/menu";
 
 const DRINK_CATEGORIES: (DrinkCategory | "All")[] = ["All", "Craft Cocktails", "Coffee", "Non-Alcoholic", "Wine", "Beer"];
 
@@ -13,6 +14,7 @@ export default function DrinksSection() {
   const { drinkItems } = useMenu();
   const { format } = usePriceFormatter();
   const [active, setActive] = useState<DrinkCategory | "All">("All");
+  const [selectedDrink, setSelectedDrink] = useState<DrinkItem | null>(null);
 
   const visible = drinkItems.filter((d) => d.visible);
   const filtered = active === "All" ? visible : visible.filter((d) => d.category === active);
@@ -66,6 +68,7 @@ export default function DrinksSection() {
               key={drink.id}
               className="flex flex-col items-center group cursor-pointer"
               style={{ animationDelay: `${i * 60}ms` }}
+              onClick={() => setSelectedDrink(drink)}
             >
               <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mb-4 rounded-full overflow-hidden bg-gray-50 dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 shadow-sm group-hover:shadow-md transition-all duration-300">
                 <Image 
@@ -87,6 +90,9 @@ export default function DrinksSection() {
           );
         })}
       </div>
+
+      {/* Detail Modal */}
+      <ItemDetailModal item={selectedDrink} onClose={() => setSelectedDrink(null)} />
     </section>
   );
 }
