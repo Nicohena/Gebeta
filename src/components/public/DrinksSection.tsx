@@ -32,7 +32,7 @@ export default function DrinksSection() {
   return (
     <section id="drinks" className="py-8">
       {/* Category pills */}
-      <div className="flex flex-wrap gap-2 justify-start md:justify-center mb-12 overflow-x-auto pb-4 scrollbar-hide">
+      <div className="flex flex-nowrap sm:flex-wrap gap-2 justify-start md:justify-center mb-12 overflow-x-auto pb-4 scrollbar-hide">
         {DRINK_CATEGORIES.map((cat) => (
           <button
             key={cat}
@@ -67,7 +67,7 @@ export default function DrinksSection() {
               className="flex flex-col items-center group cursor-pointer"
               style={{ animationDelay: `${i * 60}ms` }}
             >
-              <div className="relative w-32 h-32 md:w-36 md:h-36 mb-4 rounded-full overflow-hidden bg-gray-50 dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 shadow-sm group-hover:shadow-md transition-all duration-300">
+              <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mb-4 rounded-full overflow-hidden bg-gray-50 dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 shadow-sm group-hover:shadow-md transition-all duration-300">
                 <Image 
                   src={drink.image} 
                   alt={name} 

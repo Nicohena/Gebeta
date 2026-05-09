@@ -78,7 +78,7 @@ export default function ProfileMenu({ isMobile = false }: { isMobile?: boolean }
 
       {/* Menu Dropdown */}
       {open && (
-        <div className={`absolute ${isMobile ? 'bottom-full mb-4 left-1/2 -translate-x-1/2' : 'right-0 top-full mt-2'} w-72 bg-white dark:bg-[#1A1A1A] border border-gray-200 dark:border-neutral-800 rounded-2xl shadow-2xl overflow-hidden z-[100] transform transition-all`}>
+        <div className={`absolute ${isMobile ? 'bottom-full mb-4 right-0' : 'right-0 top-full mt-2'} w-72 bg-white dark:bg-[#1A1A1A] border border-gray-200 dark:border-neutral-800 rounded-2xl shadow-2xl overflow-hidden z-[100] transform transition-all`}>
           
           {/* Header */}
           <div className="flex items-center px-4 py-3 border-b border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-[#0A0A0A]">
