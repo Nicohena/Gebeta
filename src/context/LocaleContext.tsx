@@ -4,7 +4,6 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import type { Locale, Currency } from "@/types/i18n";
 import type { Translation } from "@/types/i18n";
 import { getTranslation } from "@/i18n";
-import { storage, STORAGE_KEYS } from "@/lib/storage";
 
 interface LocaleContextType {
   locale: Locale;
@@ -22,8 +21,12 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const savedLocale = storage.get<Locale>(STORAGE_KEYS.LOCALE, "en");
-    const savedCurrency = storage.get<Currency>(STORAGE_KEYS.CURRENCY, "USD");
+    const savedLocaleStr = window.localStorage.getItem("panda_locale");
+    const savedLocale = savedLocaleStr ? (savedLocaleStr.replace(/"/g, "") as Locale) : "en";
+    
+    const savedCurrencyStr = window.localStorage.getItem("panda_currency");
+    const savedCurrency = savedCurrencyStr ? (savedCurrencyStr.replace(/"/g, "") as Currency) : "USD";
+    
     setLocaleState(savedLocale);
     setCurrencyState(savedCurrency);
     setMounted(true);
@@ -31,12 +34,12 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);
-    storage.set(STORAGE_KEYS.LOCALE, l);
+    window.localStorage.setItem("panda_locale", l);
   }, []);
 
   const setCurrency = useCallback((c: Currency) => {
     setCurrencyState(c);
-    storage.set(STORAGE_KEYS.CURRENCY, c);
+    window.localStorage.setItem("panda_currency", c);
   }, []);
 
   const t = getTranslation(locale);
