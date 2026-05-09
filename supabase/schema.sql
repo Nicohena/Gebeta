@@ -111,3 +111,10 @@ create trigger handle_updated_at_restaurant_settings
 create trigger handle_updated_at_exchange_rates
   before update on public.exchange_rates
   for each row execute procedure public.handle_updated_at();
+
+-- Enable Realtime for all tables
+alter publication supabase_realtime add table public.menu_items;
+alter publication supabase_realtime add table public.drink_items;
+alter publication supabase_realtime add table public.restaurant_settings;
+alter publication supabase_realtime add table public.exchange_rates;
+alter publication supabase_realtime add table public.rate_history;

@@ -1,10 +1,4 @@
 export const STORAGE_KEYS = {
-  MENU_ITEMS: "panda_menu_items",
-  DRINK_ITEMS: "panda_drink_items",
-  SETTINGS: "panda_settings",
-  EXCHANGE_RATES: "panda_exchange_rates",
-  ADMIN_USER: "panda_admin_user",
-  RATE_HISTORY: "panda_rate_history",
   LOCALE: "panda_locale",
   CURRENCY: "panda_currency",
 } as const;
