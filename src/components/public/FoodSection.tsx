@@ -4,11 +4,13 @@ import { useState } from "react";
 import { useMenu } from "@/context/MenuContext";
 import FilterButtons from "./FilterButtons";
 import MenuCard from "./MenuCard";
-import type { MenuCategory } from "@/types/menu";
+import ItemDetailModal from "./ItemDetailModal";
+import type { MenuCategory, MenuItem } from "@/types/menu";
 
 export default function FoodSection() {
   const { menuItems } = useMenu();
   const [active, setActive] = useState<MenuCategory | "All">("All");
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const visible = menuItems.filter((m) => m.visible);
   const filtered = active === "All" ? visible : visible.filter((m) => m.category === active);
@@ -36,10 +38,15 @@ export default function FoodSection() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
           {filtered.map((item, i) => (
-            <MenuCard key={item.id} item={item} index={i} />
+            <div key={item.id} onClick={() => setSelectedItem(item)} className="cursor-pointer">
+              <MenuCard item={item} index={i} />
+            </div>
           ))}
         </div>
       )}
+
+      {/* Detail Modal */}
+      <ItemDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
     </section>
   );
 }
