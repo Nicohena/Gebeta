@@ -5,12 +5,12 @@ import { usePathname } from "next/navigation";
 import { useAdminAuth } from "@/context/AdminAuthContext";
 
 const NAV_ITEMS = [
-  { href: "/admin", icon: "📊", label: "Dashboard", roles: ["superadmin", "manager"] },
-  { href: "/admin/menu", icon: "🍔", label: "Menu Items", roles: ["superadmin", "manager"] },
-  { href: "/admin/drinks", icon: "🍹", label: "Drinks", roles: ["superadmin", "manager"] },
-  { href: "/admin/pricing", icon: "💰", label: "Pricing", roles: ["superadmin", "manager"] },
-  { href: "/admin/exchange-rates", icon: "💱", label: "Exchange Rates", roles: ["superadmin"] },
-  { href: "/admin/settings", icon: "⚙️", label: "Settings", roles: ["superadmin"] },
+  { href: "/admin", icon: "📊", label: "Dashboard" },
+  { href: "/admin/menu", icon: "🍔", label: "Menu Items" },
+  { href: "/admin/drinks", icon: "🍹", label: "Drinks" },
+  { href: "/admin/pricing", icon: "💰", label: "Pricing" },
+  { href: "/admin/exchange-rates", icon: "💱", label: "Exchange Rates" },
+  { href: "/admin/settings", icon: "⚙️", label: "Settings" },
 ] as const;
 
 interface AdminSidebarProps {
@@ -22,9 +22,7 @@ export default function AdminSidebar({ mobileOpen, onClose }: AdminSidebarProps)
   const pathname = usePathname();
   const { user, logout } = useAdminAuth();
 
-  const visibleLinks = NAV_ITEMS.filter((item) =>
-    user ? item.roles.some((r) => r === user.role) : false
-  );
+  const visibleLinks = NAV_ITEMS;
 
   const initials = user?.name
     .split(" ")
@@ -77,7 +75,7 @@ export default function AdminSidebar({ mobileOpen, onClose }: AdminSidebarProps)
           </div>
           <div className="min-w-0">
             <p className="text-white text-sm font-semibold truncate">{user?.name}</p>
-            <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${user?.role === "superadmin" ? "bg-[#F97316]/20 text-[#F97316]" : "bg-blue-500/20 text-blue-400"}`}>
+            <span className="text-xs px-1.5 py-0.5 rounded font-medium bg-[#F97316]/20 text-[#F97316]">
               {user?.role}
             </span>
           </div>
@@ -107,7 +105,7 @@ export default function AdminSidebar({ mobileOpen, onClose }: AdminSidebarProps)
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-          <aside className="relative flex flex-col w-64 bg-[#0A0A0A] h-full shadow-2xl">
+          <aside className="relative flex flex-col w-[80vw] max-w-64 bg-[#0A0A0A] h-full shadow-2xl">
             {sidebarContent}
           </aside>
         </div>

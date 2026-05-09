@@ -85,9 +85,9 @@ export default function AdminMenuTable() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-2xl border border-[#E5E7EB]">
-        <table className="w-full text-sm">
-          <thead className="bg-gray-50 border-b border-[#E5E7EB]">
+      <div className="md:overflow-x-auto md:rounded-2xl md:border border-[#E5E7EB]">
+        <table className="w-full text-sm block md:table">
+          <thead className="bg-gray-50 border-b border-[#E5E7EB] hidden md:table-header-group">
             <tr>
               <th className="px-4 py-3 text-left">
                 <input type="checkbox" onChange={(e) => {
@@ -95,31 +95,41 @@ export default function AdminMenuTable() {
                   else setSelected(new Set());
                 }} checked={selected.size === paginated.length && paginated.length > 0} className="rounded" />
               </th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Image</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name (EN)</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Price (USD)</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Visible</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Badge</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">Image</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">Name (EN)</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">Category</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">Price (USD)</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">Visible</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">Badge</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#E5E7EB] bg-white">
+          <tbody className="divide-y md:divide-[#E5E7EB] bg-transparent md:bg-white block md:table-row-group">
             {paginated.length === 0 ? (
-              <tr><td colSpan={8} className="text-center py-12 text-gray-400">No items found.</td></tr>
+              <tr className="block md:table-row"><td colSpan={8} className="text-center py-12 text-gray-400 block md:table-cell">No items found.</td></tr>
             ) : paginated.map((item) => (
-              <tr key={item.id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-4 py-3">
+              <tr key={item.id} className="block md:table-row bg-white hover:bg-gray-50 transition-colors mb-4 md:mb-0 border border-[#E5E7EB] md:border-0 rounded-2xl md:rounded-none overflow-hidden">
+                <td className="flex md:table-cell justify-between items-center px-4 py-3 border-b border-gray-100 md:border-none md:whitespace-nowrap">
+                  <span className="md:hidden font-semibold text-gray-500 text-xs uppercase">Select</span>
                   <input type="checkbox" checked={selected.has(item.id)} onChange={() => toggleSelect(item.id)} className="rounded" />
                 </td>
-                <td className="px-4 py-3">
+                <td className="flex md:table-cell justify-between items-center px-4 py-3 border-b border-gray-100 md:border-none md:whitespace-nowrap">
+                  <span className="md:hidden font-semibold text-gray-500 text-xs uppercase">Image</span>
                   <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-gray-100 shrink-0">
                     <Image src={item.image} alt={item.name.en} fill className="object-cover" sizes="48px" />
                   </div>
                 </td>
-                <td className="px-4 py-3 font-medium text-[#1A1A1A] max-w-[160px] truncate">{item.name.en}</td>
-                <td className="px-4 py-3 text-gray-500">{item.category}</td>
-                <td className="px-4 py-3">
+                <td className="flex md:table-cell justify-between items-center px-4 py-3 border-b border-gray-100 md:border-none md:whitespace-nowrap">
+                  <span className="md:hidden font-semibold text-gray-500 text-xs uppercase">Name</span>
+                  <span className="font-medium text-[#1A1A1A] max-w-[160px] truncate">{item.name.en}</span>
+                </td>
+                <td className="flex md:table-cell justify-between items-center px-4 py-3 border-b border-gray-100 md:border-none md:whitespace-nowrap">
+                  <span className="md:hidden font-semibold text-gray-500 text-xs uppercase">Category</span>
+                  <span className="text-gray-500">{item.category}</span>
+                </td>
+                <td className="flex md:table-cell justify-between items-center px-4 py-3 border-b border-gray-100 md:border-none md:whitespace-nowrap">
+                  <span className="md:hidden font-semibold text-gray-500 text-xs uppercase">Price</span>
+                  <div>
                   {editingPrice === item.id ? (
                     <input
                       autoFocus
@@ -135,7 +145,7 @@ export default function AdminMenuTable() {
                         }
                         if (e.key === "Escape") setEditingPrice(null);
                       }}
-                      className="w-24 border border-[#3B82F6] rounded-lg px-2 py-1 text-sm outline-none"
+                      className="w-20 sm:w-24 border border-[#3B82F6] rounded-lg px-2 py-1 text-sm outline-none"
                     />
                   ) : (
                     <button
@@ -145,16 +155,22 @@ export default function AdminMenuTable() {
                       ${item.priceUSD.toFixed(2)}
                     </button>
                   )}
+                  </div>
                 </td>
-                <td className="px-4 py-3">
+                <td className="flex md:table-cell justify-between items-center px-4 py-3 border-b border-gray-100 md:border-none md:whitespace-nowrap">
+                  <span className="md:hidden font-semibold text-gray-500 text-xs uppercase">Visible</span>
                   <AdminToggle size="sm" checked={item.visible} onChange={() => toggleItemVisibility(item.id)} />
                 </td>
-                <td className="px-4 py-3">
+                <td className="flex md:table-cell justify-between items-center px-4 py-3 border-b border-gray-100 md:border-none md:whitespace-nowrap">
+                  <span className="md:hidden font-semibold text-gray-500 text-xs uppercase">Badge</span>
+                  <div>
                   {item.badge !== "none" ? (
                     <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">{item.badge}</span>
                   ) : <span className="text-gray-300 text-xs">—</span>}
+                  </div>
                 </td>
-                <td className="px-4 py-3">
+                <td className="flex md:table-cell justify-between items-center px-4 py-3 md:whitespace-nowrap">
+                  <span className="md:hidden font-semibold text-gray-500 text-xs uppercase">Actions</span>
                   <div className="flex items-center gap-2">
                     <button
                       id={`edit-item-${item.id}`}

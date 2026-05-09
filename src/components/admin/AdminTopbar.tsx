@@ -25,7 +25,7 @@ export default function AdminTopbar({ title, onMenuToggle }: AdminTopbarProps) {
       </button>
 
       {/* Title */}
-      <h1 className="font-bold text-[#1A1A1A] text-lg flex-1" style={{ fontFamily: "var(--font-playfair)" }}>
+      <h1 className="font-bold text-[#1A1A1A] text-lg flex-1 truncate" style={{ fontFamily: "var(--font-playfair)" }}>
         {title}
       </h1>
 

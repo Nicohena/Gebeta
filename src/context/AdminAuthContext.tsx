@@ -2,8 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import type { AdminUser, AdminRole } from "@/types/admin";
-import { ADMIN_USERS } from "@/data/adminUsers";
-import { storage, STORAGE_KEYS } from "@/lib/storage";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase";
 
 interface AdminAuthContextType {
   user: AdminUser | null;
@@ -19,30 +18,70 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const saved = storage.get<AdminUser | null>(STORAGE_KEYS.ADMIN_USER, null);
-    if (saved?.token === "demo-token") setUser(saved);
-    setMounted(true);
+    let active = true;
+
+    async function loadUser() {
+      if (isSupabaseConfigured()) {
+        const supabase = createClient();
+        const { data } = await supabase.auth.getUser();
+
+        if (!active) return;
+
+        if (data.user?.email) {
+          setUser({
+            email: data.user.email,
+            name:
+              data.user.user_metadata?.name ??
+              data.user.email.split("@")[0] ??
+              "Admin",
+            role: "superadmin",
+            token: data.user.id,
+          });
+          setMounted(true);
+          return;
+        }
+      }
+      
+      setMounted(true);
+    }
+
+    loadUser();
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
-    const found = ADMIN_USERS.find(
-      (u) => u.email === email && u.password === password
-    );
-    if (!found) return false;
-    const adminUser: AdminUser = {
-      email: found.email,
-      name: found.name,
-      role: found.role as AdminRole,
-      token: "demo-token",
-    };
-    setUser(adminUser);
-    storage.set(STORAGE_KEYS.ADMIN_USER, adminUser);
-    return true;
+    if (isSupabaseConfigured()) {
+      const supabase = createClient();
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (!error && data.user?.email) {
+        setUser({
+          email: data.user.email,
+          name:
+            data.user.user_metadata?.name ??
+            data.user.email.split("@")[0] ??
+            "Admin",
+          role: "superadmin",
+          token: data.user.id,
+        });
+        return true;
+      }
+    }
+
+    return false;
   }, []);
 
   const logout = useCallback(() => {
+    if (isSupabaseConfigured()) {
+      createClient().auth.signOut();
+    }
     setUser(null);
-    storage.remove(STORAGE_KEYS.ADMIN_USER);
   }, []);
 
   if (!mounted) {
