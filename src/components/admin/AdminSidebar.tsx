@@ -105,7 +105,7 @@ export default function AdminSidebar({ mobileOpen, onClose }: AdminSidebarProps)
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-          <aside className="relative flex flex-col w-64 bg-[#0A0A0A] h-full shadow-2xl">
+          <aside className="relative flex flex-col w-[80vw] max-w-64 bg-[#0A0A0A] h-full shadow-2xl">
             {sidebarContent}
           </aside>
         </div>
