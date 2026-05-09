@@ -27,6 +27,18 @@ export interface DrinkSize {
   priceUSD: number;
 }
 
+export interface NutritionInfo {
+  kcal: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+}
+
+export interface AddOn {
+  name: string;
+  priceUSD: number;
+}
+
 export interface MenuItem {
   id: string;
   name: LocalizedString;
@@ -37,6 +49,9 @@ export interface MenuItem {
   badge: Badge;
   isSignature: boolean;
   visible: boolean;
+  ingredients?: string[];
+  nutrition?: NutritionInfo;
+  addOns?: AddOn[];
   createdAt: string;
   updatedAt: string;
 }
@@ -52,6 +67,9 @@ export interface DrinkItem {
   badge: Badge;
   isSignature: boolean;
   visible: boolean;
+  ingredients?: string[];
+  nutrition?: NutritionInfo;
+  addOns?: AddOn[];
   createdAt: string;
   updatedAt: string;
 }
