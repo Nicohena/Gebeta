@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAdminAuth } from "@/context/AdminAuthContext";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase";
 
 const NAV_ITEMS = [
   { href: "/admin", icon: "📊", label: "Dashboard" },
   { href: "/admin/menu", icon: "🍔", label: "Menu Items" },
   { href: "/admin/drinks", icon: "🍹", label: "Drinks" },
+  { href: "/admin/feedback", icon: "💬", label: "Feedback" },
   { href: "/admin/pricing", icon: "💰", label: "Pricing" },
   { href: "/admin/exchange-rates", icon: "💱", label: "Exchange Rates" },
   { href: "/admin/settings", icon: "⚙️", label: "Settings" },
@@ -21,6 +24,31 @@ interface AdminSidebarProps {
 export default function AdminSidebar({ mobileOpen, onClose }: AdminSidebarProps) {
   const pathname = usePathname();
   const { user, logout } = useAdminAuth();
+  const [unreadFeedback, setUnreadFeedback] = useState(0);
+
+  useEffect(() => {
+    const fetchUnread = async () => {
+      try {
+        const supabase = createClient();
+        const { count } = await supabase
+          .from('feedback')
+          .select('*', { count: 'exact', head: true })
+          .eq('is_read', false);
+        setUnreadFeedback(count || 0);
+      } catch (e) {
+        // ignore
+      }
+    };
+
+    fetchUnread();
+
+    const handleNewFeedback = () => {
+      fetchUnread();
+    };
+
+    window.addEventListener('admin-new-feedback', handleNewFeedback);
+    return () => window.removeEventListener('admin-new-feedback', handleNewFeedback);
+  }, []);
 
   const visibleLinks = NAV_ITEMS;
 
@@ -61,7 +89,12 @@ export default function AdminSidebar({ mobileOpen, onClose }: AdminSidebarProps)
                 <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-[#F97316] rounded-r-full" />
               )}
               <span className="text-base">{item.icon}</span>
-              <span>{item.label}</span>
+              <span className="flex-1">{item.label}</span>
+              {item.href === "/admin/feedback" && unreadFeedback > 0 && (
+                <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  {unreadFeedback}
+                </span>
+              )}
             </Link>
           );
         })}
