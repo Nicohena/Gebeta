@@ -34,3 +34,53 @@ export async function createClient() {
     }
   )
 }
+
+export async function getFeedback() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return [];
+  }
+  
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('feedback')
+    .select('*')
+    .order('created_at', { ascending: false });
+    
+  if (error) {
+    console.error("Error fetching feedback:", error);
+    return [];
+  }
+  
+  return data || [];
+}
+
+export async function getUnreadFeedbackCount() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return 0;
+  }
+  
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from('feedback')
+    .select('*', { count: 'exact', head: true })
+    .eq('is_read', false);
+    
+  if (error) {
+    console.error("Error fetching unread feedback count:", error);
+    return 0;
+  }
+  
+  return count || 0;
+}
+
+export async function markAllFeedbackAsRead() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return;
+  }
+  
+  const supabase = await createClient();
+  await supabase
+    .from('feedback')
+    .update({ is_read: true })
+    .eq('is_read', false);
+}
