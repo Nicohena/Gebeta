@@ -32,9 +32,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <NotificationProvider>
       <AdminAuthGuard>
         <AdminNotifications />
-        <div className="min-h-screen bg-gray-50 flex">
+        <div className="min-h-screen bg-gray-50 dark:bg-[#0F0F0F] flex">
           <AdminSidebar mobileOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-          <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
+          <div className="flex-1 lg:ml-64 flex flex-col min-h-screen bg-gray-50 dark:bg-[#0F0F0F]">
             <AdminTopbar title={title} onMenuToggle={() => setSidebarOpen(true)} />
             <main className="flex-1 p-6">{children}</main>
           </div>

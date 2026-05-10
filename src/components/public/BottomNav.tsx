@@ -56,7 +56,7 @@ export default function BottomNav() {
 
   return (
     <>
-      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#1A1A1A]/95 backdrop-blur-md rounded-[2.5rem] px-2 py-2 flex items-center justify-between w-[95%] max-w-[400px] z-50 shadow-2xl">
+      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-black/30 dark:bg-[#1A1A1A]/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-[2.5rem] px-2 py-2 flex items-center justify-between w-[95%] max-w-[400px] z-50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-2xl">
         {navItems.map((item) => (
           <a
             key={item.id}
@@ -64,7 +64,9 @@ export default function BottomNav() {
             onClick={(e) => handleClick(e, item.id)}
             aria-label={item.label}
             className={`relative p-3.5 rounded-full transition-all duration-300 flex items-center justify-center ${
-              active === item.id && item.id !== "#favorites" ? "bg-[#E5E7EB] text-[#1A1A1A]" : "text-gray-400 lg:hover:text-white"
+              active === item.id && item.id !== "#favorites" 
+                ? "bg-white text-black dark:bg-[#E5E7EB] dark:text-[#1A1A1A]" 
+                : "text-white/70 hover:text-white dark:text-gray-400 lg:dark:hover:text-white"
             }`}
           >
             {item.icon}
