@@ -17,7 +17,7 @@ const LocaleContext = createContext<LocaleContextType | null>(null);
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
-  const [currency, setCurrencyState] = useState<Currency>("USD");
+  const [currency, setCurrencyState] = useState<Currency>("ETB");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     const savedLocale = savedLocaleStr ? (savedLocaleStr.replace(/"/g, "") as Locale) : "en";
     
     const savedCurrencyStr = window.localStorage.getItem("panda_currency");
-    const savedCurrency = savedCurrencyStr ? (savedCurrencyStr.replace(/"/g, "") as Currency) : "USD";
+    const savedCurrency = savedCurrencyStr ? (savedCurrencyStr.replace(/"/g, "") as Currency) : "ETB";
     
     setLocaleState(savedLocale);
     setCurrencyState(savedCurrency);
@@ -46,7 +46,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   if (!mounted) {
     return (
-      <LocaleContext.Provider value={{ locale: "en", currency: "USD", t: getTranslation("en"), setLocale, setCurrency }}>
+      <LocaleContext.Provider value={{ locale: "en", currency: "ETB", t: getTranslation("en"), setLocale, setCurrency }}>
         {children}
       </LocaleContext.Provider>
     );

@@ -31,9 +31,9 @@ export default function AdminDashboardPage() {
       {/* Quick tables */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Recent food */}
-        <div className="bg-white rounded-2xl border border-[#E5E7EB] p-6">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#E5E7EB] dark:border-neutral-800 p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-bold text-[#1A1A1A] text-lg" style={{ fontFamily: "var(--font-playfair)" }}>
+            <h2 className="font-bold text-[#1A1A1A] dark:text-white text-lg" style={{ fontFamily: "var(--font-playfair)" }}>
               Recent Menu Items
             </h2>
             <Link href="/admin/menu" className="text-sm text-[#3B82F6] hover:underline font-medium">
@@ -42,17 +42,17 @@ export default function AdminDashboardPage() {
           </div>
           <div className="space-y-3">
             {recentFood.map((item) => (
-              <div key={item.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-gray-100 shrink-0">
+              <div key={item.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-neutral-800 transition-colors">
+                <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-gray-100 dark:bg-neutral-800 shrink-0">
                   <Image src={item.image} alt={item.name.en} fill className="object-cover" sizes="40px" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-[#1A1A1A] text-sm truncate">{item.name.en}</p>
-                  <p className="text-gray-400 text-xs">{item.category}</p>
+                  <p className="font-medium text-[#1A1A1A] dark:text-white text-sm truncate">{item.name.en}</p>
+                  <p className="text-gray-400 dark:text-gray-500 text-xs">{item.category}</p>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <span className="text-[#F97316] font-semibold text-sm">${item.priceUSD.toFixed(2)}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${item.visible ? "bg-emerald-100 text-emerald-600" : "bg-gray-100 text-gray-400"}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${item.visible ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400" : "bg-gray-100 dark:bg-neutral-800 text-gray-400"}`}>
                     {item.visible ? "Live" : "Hidden"}
                   </span>
                 </div>
@@ -62,9 +62,9 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Recent drinks */}
-        <div className="bg-white rounded-2xl border border-[#E5E7EB] p-6">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#E5E7EB] dark:border-neutral-800 p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-bold text-[#1A1A1A] text-lg" style={{ fontFamily: "var(--font-playfair)" }}>
+            <h2 className="font-bold text-[#1A1A1A] dark:text-white text-lg" style={{ fontFamily: "var(--font-playfair)" }}>
               Recent Drinks
             </h2>
             <Link href="/admin/drinks" className="text-sm text-[#3B82F6] hover:underline font-medium">
@@ -73,17 +73,17 @@ export default function AdminDashboardPage() {
           </div>
           <div className="space-y-3">
             {recentDrinks.map((drink) => (
-              <div key={drink.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-gray-100 shrink-0">
+              <div key={drink.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-neutral-800 transition-colors">
+                <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-gray-100 dark:bg-neutral-800 shrink-0">
                   <Image src={drink.image} alt={drink.name.en} fill className="object-cover" sizes="40px" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-[#1A1A1A] text-sm truncate">{drink.name.en}</p>
-                  <p className="text-gray-400 text-xs">{drink.category}</p>
+                  <p className="font-medium text-[#1A1A1A] dark:text-white text-sm truncate">{drink.name.en}</p>
+                  <p className="text-gray-400 dark:text-gray-500 text-xs">{drink.category}</p>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <span className="text-[#F97316] font-semibold text-sm">${drink.priceUSD.toFixed(2)}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${drink.visible ? "bg-emerald-100 text-emerald-600" : "bg-gray-100 text-gray-400"}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${drink.visible ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400" : "bg-gray-100 dark:bg-neutral-800 text-gray-400"}`}>
                     {drink.visible ? "Live" : "Hidden"}
                   </span>
                 </div>

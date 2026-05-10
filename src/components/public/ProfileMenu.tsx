@@ -60,7 +60,7 @@ export default function ProfileMenu({ isMobile = false }: { isMobile?: boolean }
           aria-label="Profile"
           onClick={() => setOpen(!open)}
           className={`relative p-3.5 rounded-full transition-all duration-300 flex items-center justify-center ${
-            open ? "bg-[#E5E7EB] text-[#1A1A1A] dark:bg-[#2A2A2A] dark:text-white" : "text-gray-400 lg:hover:text-white"
+            open ? "bg-white text-black dark:bg-[#2A2A2A] dark:text-white" : "text-white/70 hover:text-white dark:text-gray-400 lg:dark:hover:text-white"
           }`}
         >
           <UserIcon />

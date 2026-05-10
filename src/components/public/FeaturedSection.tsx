@@ -1,12 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { useLocale } from "@/context/LocaleContext";
 import { useMenu } from "@/context/MenuContext";
 import MenuCard from "./MenuCard";
+import ItemDetailModal from "./ItemDetailModal";
+import type { MenuItem } from "@/types/menu";
 
 export default function FeaturedSection() {
   const { t } = useLocale();
   const { menuItems } = useMenu();
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const featured = menuItems.filter(
     (item) => item.visible && (item.isSignature || item.badge === "Chef's Pick")
@@ -25,9 +29,13 @@ export default function FeaturedSection() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {featured.map((item, i) => (
-          <MenuCard key={item.id} item={item} index={i} />
+          <div key={item.id} onClick={() => setSelectedItem(item)} className="cursor-pointer">
+            <MenuCard item={item} index={i} />
+          </div>
         ))}
       </div>
+
+      <ItemDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
     </section>
   );
 }
