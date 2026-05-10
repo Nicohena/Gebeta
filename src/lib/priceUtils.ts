@@ -11,7 +11,7 @@ export const DEFAULT_EXCHANGE_RATES: ExchangeRates = {
 
 export const CURRENCY_SYMBOLS: Record<Currency, string> = {
   USD: "$",
-  ETB: "Br",
+  ETB: "ETB",
   CNY: "¥",
   EUR: "€",
   MXN: "MX$",
@@ -23,6 +23,16 @@ export function convertPrice(priceUSD: number, currency: Currency, rates: Exchan
 
 export function formatPrice(priceUSD: number, currency: Currency, rates: ExchangeRates): string {
   const converted = convertPrice(priceUSD, currency, rates);
+  
+  // Custom format for ETB to ensure symbol appears after the price
+  if (currency === "ETB") {
+    const formattedNumber = new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(converted);
+    return `${formattedNumber} ${CURRENCY_SYMBOLS.ETB}`;
+  }
+
   const localeMap: Record<Currency, string> = {
     USD: "en-US",
     ETB: "am-ET",
