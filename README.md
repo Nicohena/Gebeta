@@ -1,4 +1,4 @@
-# 🐼 Panda Menu
+# 🐼 Gebeta
 
 > A modern digital menu platform for restaurants — crafted with Next.js, TypeScript, and Supabase. Serves real-time updates, multi-language support, customer feedback, and a powerful admin dashboard.  
 > *Built to eliminate the paper-based menu chaos at my local restaurant. Every price change meant reprinting stacks of paper. Every new dish meant confusion. I built this to make menus digital, dynamic, and delightful.*
