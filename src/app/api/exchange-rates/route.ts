@@ -7,7 +7,18 @@ export async function GET() {
   try {
     // Use no-store so each call is fresh, but we set Cache-Control on the response
     // so the browser/CDN caches it for 1 hour
-    const res = await fetch(API_URL, { cache: "no-store" });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
+    const res = await fetch(API_URL, {
+      cache: "no-store",
+      headers: {
+        "User-Agent": "Panda-Menu/1.0",
+      },
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeout);
 
     if (!res.ok) {
       throw new Error(`Exchange rate API responded with HTTP ${res.status}`);
@@ -21,7 +32,7 @@ export async function GET() {
 
     const rates: Record<string, number> = { USD: 1 };
     for (const code of CURRENCIES) {
-      if (typeof data.rates[code] === "number") {
+      if (typeof data.rates?.[code] === "number") {
         rates[code] = data.rates[code];
       }
     }

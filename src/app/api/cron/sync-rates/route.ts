@@ -24,7 +24,19 @@ export async function GET(request: Request) {
     }
 
     // Fetch live rates
-    const res = await fetch(API_URL, { cache: "no-store" });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
+    const res = await fetch(API_URL, {
+      cache: "no-store",
+      headers: {
+        "User-Agent": "Panda-Menu/1.0",
+      },
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeout);
+
     if (!res.ok) {
       throw new Error(`Exchange rate API responded with HTTP ${res.status}`);
     }
@@ -36,7 +48,7 @@ export async function GET(request: Request) {
 
     const rates: Record<string, number> = { USD: 1 };
     for (const code of CURRENCIES) {
-      if (typeof data.rates[code] === "number") {
+      if (typeof data.rates?.[code] === "number") {
         rates[code] = data.rates[code];
       }
     }
