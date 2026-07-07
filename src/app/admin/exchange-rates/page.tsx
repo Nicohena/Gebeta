@@ -27,30 +27,35 @@ export default function AdminExchangeRatesPage() {
   const [fetchedAt, setFetchedAt] = useState<string | null>(null);
   const [autoSaved, setAutoSaved] = useState(false);
 
-  // Auto-fetch live rates on mount — fetch directly in the browser to avoid server-side network issues
+  // Auto-fetch live rates on mount through the app API so the browser avoids CORS/network issues.
   const fetchLiveRates = useCallback(async () => {
     setSyncStatus("syncing");
     setSyncError(null);
 
     const attempt = async (): Promise<Response> => {
-      const res = await fetch("https://open.er-api.com/v6/latest/USD");
+      const res = await fetch("/api/exchange-rates", { cache: "no-store" });
       if (res.status === 503 || res.status === 429) {
         await new Promise((r) => setTimeout(r, 1500));
-        return fetch("https://open.er-api.com/v6/latest/USD");
+        return fetch("/api/exchange-rates", { cache: "no-store" });
       }
       return res;
     };
 
     try {
       const res = await attempt();
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => null);
+        throw new Error(errorData?.error ?? `HTTP ${res.status}`);
+      }
+
       const data = await res.json();
-      if (data.result !== "success") throw new Error(data["error-type"] ?? "API error");
+      const rates = data?.rates;
+      if (!rates || typeof rates !== "object") throw new Error("Invalid exchange rate payload");
 
       const CODES = ["ETB", "CNY", "EUR", "MXN"] as const;
       const fetched: Partial<ExchangeRates> = { USD: 1 };
       for (const code of CODES) {
-        if (typeof data.rates[code] === "number") fetched[code] = data.rates[code];
+        if (typeof rates[code] === "number") fetched[code] = rates[code];
       }
 
       setLiveRates(fetched);
