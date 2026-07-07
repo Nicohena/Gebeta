@@ -21,11 +21,22 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     let active = true;
 
     async function loadUser() {
-      if (isSupabaseConfigured()) {
+      if (!isSupabaseConfigured()) {
+        setMounted(true);
+        return;
+      }
+
+      try {
         const supabase = createClient();
-        const { data } = await supabase.auth.getUser();
+        const { data, error } = await supabase.auth.getUser();
 
         if (!active) return;
+
+        if (error) {
+          console.warn("Admin auth initialization warning:", error.message);
+          setMounted(true);
+          return;
+        }
 
         if (data.user?.email) {
           setUser({
@@ -40,9 +51,13 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
           setMounted(true);
           return;
         }
+      } catch (err) {
+        console.warn("Admin auth initialization failed:", err);
       }
-      
-      setMounted(true);
+
+      if (active) {
+        setMounted(true);
+      }
     }
 
     loadUser();
@@ -53,7 +68,11 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
-    if (isSupabaseConfigured()) {
+    if (!isSupabaseConfigured()) {
+      return false;
+    }
+
+    try {
       const supabase = createClient();
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
@@ -72,6 +91,8 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
         });
         return true;
       }
+    } catch (err) {
+      console.warn("Admin login failed:", err);
     }
 
     return false;
@@ -79,7 +100,7 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = useCallback(() => {
     if (isSupabaseConfigured()) {
-      createClient().auth.signOut();
+      createClient().auth.signOut().catch(() => undefined);
     }
     setUser(null);
   }, []);
