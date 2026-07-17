@@ -1,16 +1,16 @@
 export type MenuCategory =
-  | "Small Plates"
-  | "Mains"
   | "Burgers"
-  | "Desserts"
-  | "Pasta";
+  | "Sandwiches"
+  | "Pizza"
+  | "Burritos"
+  | "Noodles"
+  | "Breakfast";
 
 export type DrinkCategory =
-  | "Craft Cocktails"
-  | "Coffee"
-  | "Non-Alcoholic"
-  | "Wine"
-  | "Beer";
+  | "Mojito"
+  | "Juice"
+  | "Milkshake"
+  | "Soft Drink";
 
 export type Badge = "none" | "Chef's Pick" | "New" | "Fan Favorite";
 

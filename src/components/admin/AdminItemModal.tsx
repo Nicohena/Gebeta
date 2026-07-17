@@ -15,8 +15,8 @@ interface AdminItemModalProps {
   editItem?: MenuItem | DrinkItem | null;
 }
 
-const FOOD_CATEGORIES: MenuCategory[] = ["Small Plates", "Mains", "Burgers", "Pasta", "Desserts"];
-const DRINK_CATEGORIES: DrinkCategory[] = ["Craft Cocktails", "Coffee", "Non-Alcoholic", "Wine", "Beer"];
+const FOOD_CATEGORIES: MenuCategory[] = ["Burgers", "Sandwiches", "Pizza", "Burritos", "Noodles", "Breakfast"];
+const DRINK_CATEGORIES: DrinkCategory[] = ["Mojito", "Juice", "Milkshake", "Soft Drink"];
 const BADGES: Badge[] = ["none", "Chef's Pick", "New", "Fan Favorite"];
 const LOCALES = ["en", "am", "zh", "fr", "es"] as const;
 const LOCALE_FLAGS: Record<string, string> = { en: "🇺🇸", am: "🇪🇹", zh: "🇨🇳", fr: "🇫🇷", es: "🇪🇸" };
@@ -33,7 +33,7 @@ export default function AdminItemModal({ open, onClose, onSave, itemType, editIt
   const [name, setName] = useState(emptyLocalizedString());
   const [description, setDescription] = useState(emptyLocalizedString());
   const [category, setCategory] = useState<MenuCategory | DrinkCategory>(
-    itemType === "food" ? "Mains" : "Craft Cocktails"
+    itemType === "food" ? "Burgers" : "Mojito"
   );
   const [priceUSD, setPriceUSD] = useState("12.00");
   const [badge, setBadge] = useState<Badge>("none");
@@ -55,7 +55,7 @@ export default function AdminItemModal({ open, onClose, onSave, itemType, editIt
     } else {
       setName(emptyLocalizedString());
       setDescription(emptyLocalizedString());
-      setCategory(itemType === "food" ? "Mains" : "Craft Cocktails");
+      setCategory(itemType === "food" ? "Burgers" : "Mojito");
       setPriceUSD("12.00");
       setBadge("none");
       setIsSignature(false);

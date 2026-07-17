@@ -29,20 +29,20 @@ export interface Translation {
   };
   filter: {
     all: string;
-    smallPlates: string;
-    mains: string;
     burgers: string;
-    desserts: string;
-    pasta: string;
+    sandwiches: string;
+    pizza: string;
+    burritos: string;
+    noodles: string;
+    breakfast: string;
   };
   drinks: {
     title: string;
     subtitle: string;
-    craftCocktails: string;
-    coffee: string;
-    nonAlcoholic: string;
-    wine: string;
-    beer: string;
+    mojito: string;
+    juice: string;
+    milkshake: string;
+    softDrink: string;
   };
   featured: {
     title: string;

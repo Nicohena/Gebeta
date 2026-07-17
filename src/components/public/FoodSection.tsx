@@ -12,7 +12,7 @@ export default function FoodSection() {
   const [active, setActive] = useState<MenuCategory | "All">("All");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
-  const visible = menuItems.filter((m) => m.visible);
+  const visible = [...menuItems].reverse().filter((m) => m.visible);
   const filtered = active === "All" ? visible : visible.filter((m) => m.category === active);
 
   return (
