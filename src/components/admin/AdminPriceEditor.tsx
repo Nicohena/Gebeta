@@ -6,7 +6,7 @@ import { applyAdjustmentPreview } from "@/lib/priceUtils";
 import type { PriceAdjustment, MenuCategory, DrinkCategory } from "@/types/menu";
 import ConfirmDialog from "./ConfirmDialog";
 
-const ALL_CATS = ["All", "Small Plates", "Mains", "Burgers", "Pasta", "Desserts", "Craft Cocktails", "Coffee", "Non-Alcoholic"] as const;
+const ALL_CATS = ["All", "Burgers", "Sandwiches", "Pizza", "Burritos", "Noodles", "Breakfast", "Mojito", "Juice", "Milkshake", "Soft Drink"] as const;
 
 export default function AdminPriceEditor() {
   const { menuItems, drinkItems, bulkUpdatePrices, updateMenuItem, updateDrinkItem, resetToDefaults } = useMenu();
